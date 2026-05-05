@@ -53,17 +53,30 @@ void printArtists(struct Artist* head) {
       printf("list of artists is empty.\n");
       return;
    }
-    
-   printf("\n*** Artist List ***\n");
+ 
+   int count = 0;
+   struct Artist* temp = head;
+   while (temp != NULL) { count++; temp = temp->next; }
+ 
+   printf("\n========================================\n");
+   printf("       ARTIST LIST (%d artist/s)        \n", count);
+   printf("========================================\n");
+ 
+   int index = 1;
    while (head != NULL) {
-      printf("ID: %d | Name: %s | ", head->id, head->name);
-      if (head->infoType == 1) printf("Phone: %s\n", head->info.phone);
-      else 
-         if (head->infoType == 2) printf("National ID: %s\n", head->info.nationalId);
-         else 
-            printf("Address: %s\n", head->info.address);
+      printf("\n  [%d] ID     : %d\n", index, head->id);
+      printf("      Name   : %s\n", head->name);
+      if (head->infoType == 1)
+         printf("      Phone  : %s\n", head->info.phone);
+      else if (head->infoType == 2)
+         printf("      Nat.ID : %s\n", head->info.nationalId);
+      else
+         printf("      Address: %s\n", head->info.address);
+      printf("  ----------------------------------------\n");
       head = head->next;
+      index++;
    }
+   printf("========================================\n\n");
 }
 //=========================================
 void freeArtists(struct Artist* head) {
